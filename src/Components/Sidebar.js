@@ -2,10 +2,10 @@ import React from "react";
 import SidebarHeader from "./SidebarHeader";
 import SidebarBody from "./SidebarBody";
 
-function Sidebar() {
+function Sidebar({ ipfs, orbit }) {
     return (
         <div className="fl w-30 vh-100 gray br">
-            <SidebarHeader />
+            <SidebarHeader ipfs={ipfs} orbit={orbit} />
             <SidebarBody />
         </div>
     );
