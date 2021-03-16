@@ -1,10 +1,25 @@
 import React, { useState } from "react";
 import "../css/ChatFooter.css";
-function ChatFooter() {
+import { addNewMessage } from "../Backend/messageHandler";
+function ChatFooter({ currRoom, setMessages }) {
     const [message, setMessage] = useState("");
-    const sendMessage = (e) => {
+    const sendMessage = async (e) => {
         e.preventDefault();
-        console.log(message);
+        if (currRoom) {
+            const roomName = Object.keys(currRoom)[0];
+            const db = currRoom[roomName];
+            const { id } = await db._ipfs.id();
+            const msg = {
+                from: id,
+                message,
+                time: new Date().toLocaleTimeString(),
+                type: 0,
+            };
+            db.add(msg);
+            addNewMessage(roomName, setMessages, msg);
+        } else {
+            console.log("Select a Chat First!!!!");
+        }
         setMessage("");
     };
     return (

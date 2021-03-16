@@ -1,4 +1,6 @@
-const createDB = async (p1, p2, orbitdb, data) => {
+import { addNewMessage } from "./messageHandler";
+const createDB = async (p1, p2, orbitdb, data, setMessages) => {
+    console.log(setMessages);
     const { pubKey } = data;
     const options = {
         accessController: {
@@ -13,11 +15,13 @@ const createDB = async (p1, p2, orbitdb, data) => {
             .collect()
             .map((e) => e.payload.value)[0];
         console.log(message);
+        addNewMessage(message.from.slice(-6), setMessages, message);
     });
     return db;
 };
 
-const openDB = async (orbitdb, data) => {
+const openDB = async (orbitdb, data, setMessages) => {
+    console.log(setMessages);
     const { roomID } = data;
     const db = await orbitdb.eventlog(roomID);
     await db.load();
@@ -26,7 +30,7 @@ const openDB = async (orbitdb, data) => {
             .iterator()
             .collect()
             .map((e) => e.payload.value)[0];
-        console.log(message);
+        addNewMessage(message.from.slice(-6), setMessages, message);
     });
     return db;
 };

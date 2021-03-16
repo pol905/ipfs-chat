@@ -1,9 +1,12 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
 
-function PeerCard({ roomName }) {
+function PeerCard({ rooms, setCurrRoom, roomName }) {
+    const selectRoom = () => {
+        setCurrRoom({ [roomName]: rooms[roomName] });
+    };
     return (
-        <div className="flex hover-bg-mid-gray pointer">
+        <div className="flex hover-bg-mid-gray pointer" onClick={selectRoom}>
             <div className="pa3">
                 <Avatar
                     src={`https://avatars.dicebear.com/api/human/${String(
