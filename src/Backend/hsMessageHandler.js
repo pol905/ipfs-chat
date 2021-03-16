@@ -1,6 +1,6 @@
 import { createDB, openDB } from "./initialHandshake";
 
-const messageHandler = async (ipfs, orbitdb, data, rooms) => {
+const messageHandler = async (ipfs, orbitdb, data, rooms, setRooms) => {
     const { nodeID, type } = data;
     const p1 = orbitdb.id.slice(-6);
     const p2 = nodeID.slice(-6);
@@ -19,7 +19,7 @@ const messageHandler = async (ipfs, orbitdb, data, rooms) => {
             roomID: newRoom.address.toString(),
             walletAddr: "",
         }); // Handle Ethereum Wallet addresses later
-
+        setRooms((prevState) => ({ ...prevState, [p2]: newRoom }));
         console.log("Node B(step 1):", await rooms.all);
     } else if (type === 1) {
         const newRoom = await openDB(orbitdb, data);
@@ -27,6 +27,7 @@ const messageHandler = async (ipfs, orbitdb, data, rooms) => {
             roomID: newRoom.address.toString(),
             walletAddr: "",
         });
+        setRooms((prevState) => ({ ...prevState, [p2]: newRoom }));
         console.log("Node A(step 2):", await rooms.all);
     }
 };

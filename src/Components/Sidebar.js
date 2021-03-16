@@ -2,11 +2,11 @@ import React from "react";
 import SidebarHeader from "./SidebarHeader";
 import SidebarBody from "./SidebarBody";
 
-function Sidebar({ ipfs, orbit }) {
+function Sidebar({ ipfs, orbit, rooms }) {
     return (
-        <div className="fl w-30 vh-100 gray br">
+        <div className="fl w-30 vh-100 bg-dark-gray gray br">
             <SidebarHeader ipfs={ipfs} orbit={orbit} />
-            <SidebarBody />
+            <SidebarBody rooms={rooms} />
         </div>
     );
 }

@@ -11,10 +11,10 @@ function App() {
     const [ready, setReady] = useState(false);
     const [ipfs, setIPFS] = useState();
     const [orbit, setOrbit] = useState();
-
+    const [rooms, setRooms] = useState({});
     useEffect(() => {
-        const node = async () => await peer();
-        node().then(({ ipfs, orbitdb }) => {
+        const node = async () => await peer(setRooms);
+        node().then(async ({ ipfs, orbitdb }) => {
             setIPFS(ipfs);
             setOrbit(orbitdb);
             setReady(true);
@@ -26,7 +26,7 @@ function App() {
         <div className="overflow-y-hidden">
             {ready === true ? (
                 <>
-                    <Sidebar ipfs={ipfs} orbit={orbit} />
+                    <Sidebar ipfs={ipfs} orbit={orbit} rooms={rooms} />
                     <ChatWindow />
                 </>
             ) : (
