@@ -6,13 +6,18 @@ function SidebarHeader({ ipfs, orbit }) {
     const openPrompt = async () => {
         const peerID = prompt("Enter Peer ID");
         if (peerID) {
+            const p1 = peerID.slice(-6) + "_private";
             const nodeID = orbit.id;
             const req = JSON.stringify({
                 nodeID,
                 pubKey: orbit.identity.id,
                 type: 0,
             });
-            ipfs.pubsub.publish(peerID.slice(-6) + "_private", req);
+            ipfs.pubsub.subscribe(p1, (msg) => {
+                console.log(msg);
+            });
+            ipfs.pubsub.publish(p1, "Hello");
+            ipfs.pubsub.publish(p1, req);
         }
     };
 

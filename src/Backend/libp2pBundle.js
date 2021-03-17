@@ -7,6 +7,7 @@ import KadDHT from "libp2p-kad-dht";
 import MPLEX from "libp2p-mplex";
 import { NOISE } from "libp2p-noise";
 import PubsubPeerDiscovery from "libp2p-pubsub-peer-discovery";
+import Floodsub from "libp2p-floodsub";
 
 const libp2pBundle = (opts) => {
     const peerId = opts.peerId;
@@ -30,7 +31,7 @@ const libp2pBundle = (opts) => {
             connEncryption: [NOISE],
             peerDiscovery: [Bootstrap, PubsubPeerDiscovery],
             dht: KadDHT,
-            pubsub: GossipSub,
+            pubsub: Floodsub,
         },
         config: {
             peerDiscovery: {
