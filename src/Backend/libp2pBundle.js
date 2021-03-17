@@ -10,13 +10,18 @@ import PubsubPeerDiscovery from "libp2p-pubsub-peer-discovery";
 
 const libp2pBundle = (opts) => {
     const peerId = opts.peerId;
-    const bootstrapList = opts.config.Bootstrap;
-    const topics = ["_chat_app._p2p._pubsub"];
+    const bootstrapList = [
+        ...opts.config.Bootstrap,
+        "/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
+        "/dnsaddr/bootstrap.libp2p.io/ipfs/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN",
+        "/dnsaddr/bootstrap.libp2p.io/ipfs/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
+    ];
     return new Libp2p({
         peerId,
         addresses: {
             listen: [
                 "/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/",
+                "/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star/",
             ],
         },
         modules: {
@@ -29,17 +34,17 @@ const libp2pBundle = (opts) => {
         },
         config: {
             peerDiscovery: {
-                bootstrap: {
-                    interval: 30e3,
+                [Bootstrap.tag]: {
                     enabled: true,
                     list: bootstrapList,
+                    interval: 3000,
                 },
                 [WebRTCStar.tag]: {
                     enabled: true,
                 },
-                PubsubPeerDiscovery: {
-                    interval: 3000,
-                    topics: topics,
+                [PubsubPeerDiscovery.tag]: {
+                    interval: 1000,
+                    enabled: true,
                 },
             },
             pubsub: {
