@@ -13,10 +13,6 @@ function SidebarHeader({ ipfs, orbit }) {
                 pubKey: orbit.identity.id,
                 type: 0,
             });
-            ipfs.pubsub.subscribe(p1, (msg) => {
-                console.log(msg);
-            });
-            ipfs.pubsub.publish(p1, "Hello");
             ipfs.pubsub.publish(p1, req);
         }
     };
