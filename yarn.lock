@@ -10685,6 +10685,17 @@ libp2p-noise@^2.0.1, libp2p-noise@^2.0.5:
     protobufjs "^6.10.1"
     uint8arrays "^2.0.5"
 
+libp2p-pubsub-peer-discovery@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/libp2p-pubsub-peer-discovery/-/libp2p-pubsub-peer-discovery-3.0.0.tgz#9a813d260ba08cf798b35c9bf24e9e013b60ea6c"
+  integrity sha512-FsqI8b3Syo3lt7N23DuWAWHEpxxib/vztFJ65hALdLCQQLb/qJZWz4C+EN5DFxCvJAQ/iabvEDhdNujA9arABA==
+  dependencies:
+    debug "^4.2.0"
+    emittery "^0.7.1"
+    multiaddr "^8.0.0"
+    peer-id "^0.14.2"
+    protons "^2.0.0"
+
 libp2p-record@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/libp2p-record/-/libp2p-record-0.10.0.tgz#176519fea533d79485fd82d7f47b2b4094f86877"
