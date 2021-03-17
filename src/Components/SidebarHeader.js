@@ -13,6 +13,9 @@ function SidebarHeader({ ipfs, orbit }) {
                 pubKey: orbit.identity.id,
                 type: 0,
             });
+            await ipfs.swarm.connect(
+                `/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/p2p/${peerID}`
+            );
             ipfs.pubsub.publish(p1, req);
         }
     };
