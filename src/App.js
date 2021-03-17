@@ -12,6 +12,7 @@ function App() {
     const [rooms, setRooms] = useState({});
     const [currRoom, setCurrRoom] = useState();
     const [messages, setMessages] = useState({});
+    const [who, setWho] = useState("");
 
     useEffect(() => {
         const node = async () => await peer(setRooms, setMessages);
@@ -19,6 +20,7 @@ function App() {
             setIPFS(ipfs);
             setOrbit(orbitdb);
             setReady(true);
+            setWho(orbitdb.id);
         });
         return async () => await node.stop();
     }, []);
@@ -34,6 +36,7 @@ function App() {
                         setCurrRoom={setCurrRoom}
                     />
                     <ChatWindow
+                        who={who}
                         currRoom={currRoom}
                         messages={messages}
                         setMessages={setMessages}

@@ -17,7 +17,7 @@ function SidebarHeader({ ipfs, orbit }) {
     };
 
     return (
-        <div className="w-100 bg-mid-gray pa3 flex justify-between gray bb">
+        <div className="w-100 bg-mid-gray pa2 flex justify-between gray bb">
             <Avatar
                 src={`https://avatars.dicebear.com/api/human/${String(
                     Math.random()

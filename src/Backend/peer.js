@@ -13,7 +13,12 @@ const peer = async (setRooms, setMessages) => {
 
     const allRooms = await rooms.all;
     Object.keys(allRooms).forEach(async (room) => {
-        const db = await openDB(orbitdb, allRooms[room]);
+        console.log(allRooms[room]);
+        const db = await openDB(
+            orbitdb,
+            { roomID: allRooms[room].roomID },
+            setMessages
+        );
         // await db.drop();
         // await rooms.drop();
         setRooms((prevState) => ({ ...prevState, [room]: db }));

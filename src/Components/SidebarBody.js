@@ -3,7 +3,7 @@ import PeerCard from "./PeerCard";
 
 function SidebarBody({ rooms, setCurrRoom }) {
     return (
-        <div className="pre w-100 bg-dark-gray overflow-x-hidden overflow-y-hidden">
+        <div className="h-100 w-30 fixed bg-dark-gray overflow-y-scroll">
             {Object.keys(rooms).map((roomName, index) => {
                 return (
                     <PeerCard
