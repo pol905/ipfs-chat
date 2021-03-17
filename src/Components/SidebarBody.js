@@ -1,15 +1,22 @@
 import React from "react";
 import PeerCard from "./PeerCard";
+import SimpleBar from "simplebar-react";
+import "simplebar/dist/simplebar.min.css";
 
-function SidebarBody() {
+function SidebarBody({ rooms, setCurrRoom }) {
     return (
-        <div className="pre w-100 bg-dark-gray overflow-y-hidden">
-            {Array(20)
-                .fill(0)
-                .map((num, index) => {
-                    return <PeerCard key={index} />;
-                })}
-        </div>
+        <SimpleBar className="h-100 w-100 bg-dark-gray">
+            {Object.keys(rooms).map((roomName, index) => {
+                return (
+                    <PeerCard
+                        key={index}
+                        roomName={roomName}
+                        rooms={rooms}
+                        setCurrRoom={setCurrRoom}
+                    />
+                );
+            })}
+        </SimpleBar>
     );
 }
 
