@@ -1,9 +1,9 @@
 import { Avatar } from "@material-ui/core";
 import React from "react";
 
-function ChatBody({ currRoom }) {
+function ChatHeader({ currRoom }) {
     return (
-        <div className="w-100 h-10 pa2 bg-mid-gray flex gray bb">
+        <div className="w-100 pa2 bg-mid-gray flex gray bb">
             <Avatar
                 src={`https://avatars.dicebear.com/api/human/${String(
                     Math.random()
@@ -16,4 +16,4 @@ function ChatBody({ currRoom }) {
     );
 }
 
-export default ChatBody;
+export default ChatHeader;
