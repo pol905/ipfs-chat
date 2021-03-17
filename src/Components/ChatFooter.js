@@ -23,13 +23,12 @@ function ChatFooter({ currRoom, setMessages }) {
         setMessage("");
     };
     return (
-        <div className="w-100 h-19 bg-dark-gray flex gray bl bt">
+        <div className="w-100 h-19 bg-dark-gray gray bl bt">
             <form onSubmit={sendMessage}>
                 <input
                     value={message}
                     type="text"
-                    size="120"
-                    className="mt3 ml4 br-pill h-25 input-style"
+                    className="mt3 ml4 br-pill h-25 input-style w-90"
                     placeholder="Enter your message......."
                     onChange={(e) => setMessage(e.target.value)}
                 />

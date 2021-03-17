@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import SimpleBar from "simplebar-react";
+import "simplebar/dist/simplebar.min.css";
 import "../css/ChatBody.css";
 
 function ChatBody({ currRoom, messages, setMessages, who }) {
@@ -16,7 +18,7 @@ function ChatBody({ currRoom, messages, setMessages, who }) {
         }
     }, [currRoom]);
     return (
-        <div className="h-81 chat-bg overflow-y-scroll flex-auto">
+        <SimpleBar className="h-81 chat-bg">
             {messages[room]
                 ? Object.values(messages[room]).map(
                       ({ from, message, time, type }, index) => {
@@ -36,7 +38,7 @@ function ChatBody({ currRoom, messages, setMessages, who }) {
                       }
                   )
                 : undefined}
-        </div>
+        </SimpleBar>
     );
 }
 

@@ -1,9 +1,11 @@
 import React from "react";
 import PeerCard from "./PeerCard";
+import SimpleBar from "simplebar-react";
+import "simplebar/dist/simplebar.min.css";
 
 function SidebarBody({ rooms, setCurrRoom }) {
     return (
-        <div className="h-100 w-30 fixed bg-dark-gray overflow-y-scroll">
+        <SimpleBar className="h-100 w-100 bg-dark-gray">
             {Object.keys(rooms).map((roomName, index) => {
                 return (
                     <PeerCard
@@ -14,7 +16,7 @@ function SidebarBody({ rooms, setCurrRoom }) {
                     />
                 );
             })}
-        </div>
+        </SimpleBar>
     );
 }
 
