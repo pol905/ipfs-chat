@@ -1,6 +1,6 @@
 import { addNewMessage } from "./messageHandler";
 const createDB = async (p1, p2, orbitdb, data, setMessages) => {
-    console.log(setMessages);
+    console.log(data);
     const { pubKey } = data;
     const options = {
         accessController: {
@@ -21,7 +21,7 @@ const createDB = async (p1, p2, orbitdb, data, setMessages) => {
 };
 
 const openDB = async (orbitdb, data, setMessages) => {
-    console.log(setMessages);
+    console.log(data);
     const { roomID } = data;
     const db = await orbitdb.eventlog(roomID);
     await db.load();
