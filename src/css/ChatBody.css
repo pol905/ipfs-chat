@@ -1,5 +1,5 @@
-.h-81 {
-    height: 81%;
+.h-80 {
+    height: 80%;
 }
 
 .chat-bg {
@@ -9,7 +9,7 @@
 }
 
 .chat-message {
-    margin-left:3%;
+    margin-left: 3%;
     position: relative;
     font-size: 16px;
     padding: 10px;

@@ -18,7 +18,7 @@ function ChatBody({ currRoom, messages, setMessages, who }) {
         }
     }, [currRoom]);
     return (
-        <SimpleBar className="h-81 chat-bg">
+        <SimpleBar className="h-80 chat-bg">
             {messages[room]
                 ? Object.values(messages[room]).map(
                       ({ from, message, time, type }, index) => {

@@ -7,15 +7,11 @@ import KadDHT from "libp2p-kad-dht";
 import MPLEX from "libp2p-mplex";
 import { NOISE } from "libp2p-noise";
 import PubsubPeerDiscovery from "libp2p-pubsub-peer-discovery";
+import Floodsub from "libp2p-floodsub";
 
 const libp2pBundle = (opts) => {
     const peerId = opts.peerId;
-    const bootstrapList = [
-        ...opts.config.Bootstrap,
-        "/ip4/104.131.131.82/tcp/4001/ipfs/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ",
-        "/dnsaddr/bootstrap.libp2p.io/ipfs/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN",
-        "/dnsaddr/bootstrap.libp2p.io/ipfs/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa",
-    ];
+    const bootstrapList = opts.config.Bootstrap;
     return new Libp2p({
         peerId,
         addresses: {
@@ -30,7 +26,7 @@ const libp2pBundle = (opts) => {
             connEncryption: [NOISE],
             peerDiscovery: [Bootstrap, PubsubPeerDiscovery],
             dht: KadDHT,
-            pubsub: GossipSub,
+            pubsub: Floodsub,
         },
         config: {
             peerDiscovery: {

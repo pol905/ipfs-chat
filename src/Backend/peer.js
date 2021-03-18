@@ -5,7 +5,6 @@ import libp2pBundle from "./libp2pBundle";
 import { openDB } from "./initialHandshake";
 
 const peer = async (setRooms, setMessages) => {
-    console.log(setMessages);
     const ipfs = await IPFS.create({ libp2p: libp2pBundle });
     const orbitdb = await OrbitDB.createInstance(ipfs);
     const rooms = await orbitdb.keyvalue("rooms");
@@ -23,10 +22,10 @@ const peer = async (setRooms, setMessages) => {
         // await rooms.drop();
         setRooms((prevState) => ({ ...prevState, [room]: db }));
     });
-
+    console.log(orbitdb.id.slice(-6));
     ipfs.pubsub.subscribe(orbitdb.id.slice(-6) + "_private", (msg) => {
         const data = JSON.parse(msg.data.toString());
-        console.log(setMessages);
+        console.log(data);
         messageHandler(ipfs, orbitdb, data, rooms, setRooms, setMessages);
     });
 
