@@ -13,18 +13,6 @@ function SidebarHeader({ ipfs, orbit }) {
                 pubKey: orbit.identity.id,
                 type: 0,
             });
-            try {
-                await ipfs.swarm.connect(
-                    `/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/p2p/${peerID}`,
-                    { timeout: 5000 }
-                );
-                await ipfs.swarm.connect(
-                    `/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star/p2p/${peerID}`,
-                    { timeout: 3000 }
-                );
-            } catch (e) {
-                console.log("Unable to reach peer!");
-            }
             ipfs.pubsub.publish(p1, req);
         }
     };
