@@ -1,16 +1,16 @@
-const addNewMessage = (roomName, setMessages, msg) => {
+const addNewMessage = (p1, setMessages, msg) => {
     console.log(setMessages);
     setMessages((prevState) => {
         let newState;
-        if (!!prevState[roomName]) {
+        if (!!prevState[p1]) {
             newState = {
                 ...prevState,
-                [roomName]: [...prevState[roomName], msg],
+                [p1]: [...prevState[p1], msg],
             };
         } else {
             newState = {
                 ...prevState,
-                [roomName]: [msg],
+                [p1]: [msg],
             };
         }
         console.log(newState);

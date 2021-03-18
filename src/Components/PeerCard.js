@@ -19,7 +19,7 @@ function PeerCard({ rooms, setCurrRoom, roomName }) {
             </div>
             <div className="flex justify-between bb-ns white-80 sans-serif w-70">
                 <div className="mt3">
-                    <h3 className="mv0">{roomName}</h3>
+                    <h3 className="mv0">{roomName.slice(-6)}</h3>
                     <h5 className="mt2">Last message....</h5>
                 </div>
                 <time className="mt4">03:52 PM</time>
