@@ -15,11 +15,12 @@ const messageHandler = async (
         const newRoom = await createDB(p1, p2, orbitdb, data, setMessages);
         const res = JSON.stringify({
             nodeID: orbitdb.id,
+            to: nodeID,
             roomID: newRoom.address.toString(),
             type: 1,
         });
 
-        ipfs.pubsub.publish(p2 + "_private", res);
+        ipfs.pubsub.publish("_OrbitDB._p2p._InitialHandshake", res);
 
         await rooms.set(nodeID, {
             roomID: newRoom.address.toString(),

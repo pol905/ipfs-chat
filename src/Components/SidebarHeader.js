@@ -6,14 +6,15 @@ function SidebarHeader({ ipfs, orbit }) {
     const openPrompt = async () => {
         const peerID = prompt("Enter Peer ID");
         if (peerID) {
-            const p1 = peerID.slice(-6) + "_private";
             const nodeID = orbit.id;
             const req = JSON.stringify({
                 nodeID,
+                to: peerID,
                 pubKey: orbit.identity.id,
                 type: 0,
             });
-            ipfs.pubsub.publish(p1, req);
+            console.log("Sending data....");
+            ipfs.pubsub.publish("_OrbitDB._p2p._InitialHandshake", req);
         }
     };
 
