@@ -5,8 +5,10 @@ import "../css/ChatBody.css";
 
 function ChatBody({ currRoom, messages, setMessages, who }) {
     let room;
+    let p1;
     if (currRoom) {
         room = Object.keys(currRoom)[0];
+        p1 = room.slice(-6);
     }
     useEffect(() => {
         if (currRoom) {
@@ -14,13 +16,13 @@ function ChatBody({ currRoom, messages, setMessages, who }) {
                 .iterator({ limit: -1 })
                 .collect()
                 .map((e) => e.payload.value);
-            setMessages((prevState) => ({ ...prevState, [room]: msgs }));
+            setMessages((prevState) => ({ ...prevState, [p1]: msgs }));
         }
     }, [currRoom]);
     return (
         <SimpleBar className="h-80 chat-bg">
-            {messages[room]
-                ? Object.values(messages[room]).map(
+            {messages[p1]
+                ? Object.values(messages[p1]).map(
                       ({ from, message, time, type }, index) => {
                           return (
                               <p
