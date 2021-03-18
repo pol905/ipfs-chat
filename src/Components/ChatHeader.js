@@ -3,7 +3,10 @@ import React from "react";
 
 function ChatHeader({ currRoom }) {
     return (
-        <div className="w-100 pa2 bg-mid-gray flex gray bb">
+        <div
+            style={{ height: "10%" }}
+            className="w-100 pa2 bg-mid-gray flex gray bb"
+        >
             <Avatar
                 src={`https://avatars.dicebear.com/api/human/${String(
                     Math.random()

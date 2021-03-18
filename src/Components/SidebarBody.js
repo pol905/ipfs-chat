@@ -5,7 +5,10 @@ import "simplebar/dist/simplebar.min.css";
 
 function SidebarBody({ rooms, setCurrRoom }) {
     return (
-        <SimpleBar className="h-100 w-100 bg-dark-gray">
+        <SimpleBar
+            style={{ height: "90%" }}
+            className="h-75 w-100 bg-dark-gray"
+        >
             {Object.keys(rooms).map((roomName, index) => {
                 return (
                     <PeerCard

@@ -13,15 +13,27 @@ function SidebarHeader({ ipfs, orbit }) {
                 pubKey: orbit.identity.id,
                 type: 0,
             });
-            await ipfs.swarm.connect(
-                `/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/p2p/${peerID}`
-            );
+            try {
+                await ipfs.swarm.connect(
+                    `/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/p2p/${peerID}`,
+                    { timeout: 5000 }
+                );
+                await ipfs.swarm.connect(
+                    `/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star/p2p/${peerID}`,
+                    { timeout: 3000 }
+                );
+            } catch (e) {
+                console.log("Unable to reach peer!");
+            }
             ipfs.pubsub.publish(p1, req);
         }
     };
 
     return (
-        <div className="w-100 bg-mid-gray pa2 flex justify-between gray bb">
+        <div
+            style={{ height: "10%" }}
+            className="w-100 bg-mid-gray pa2 flex justify-between gray bb"
+        >
             <Avatar
                 src={`https://avatars.dicebear.com/api/human/${String(
                     Math.random()
