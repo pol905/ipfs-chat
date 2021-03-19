@@ -2091,6 +2091,11 @@
     prop-types "^15.7.2"
     react-is "^16.8.0 || ^17.0.0"
 
+"@metamask/detect-provider@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@metamask/detect-provider/-/detect-provider-1.2.0.tgz#3667a7531f2a682e3c3a43eaf3a1958bdb42a696"
+  integrity sha512-ocA76vt+8D0thgXZ7LxFPyqw3H7988qblgzddTDA6B8a/yU0uKV42QR/DhA+Jh11rJjxW0jKvwb5htA6krNZDQ==
+
 "@motrix/nat-api@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@motrix/nat-api/-/nat-api-0.3.1.tgz#de18e7101cc6ed82e9e1e7b5720cb2b40f490246"
@@ -15491,6 +15496,11 @@ static-extend@^0.1.1:
   dependencies:
     define-property "^0.2.5"
     object-copy "^0.1.0"
+
+status-indicator@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/status-indicator/-/status-indicator-1.0.9.tgz#d802ae5b53e432d4a36d9b0f195fe1049385ac37"
+  integrity sha512-xaUIXfWA++prLDv49U2xrcIJAMKb0djfpjDc4aApW+bDIx9HzI26CHWKEoAp/DuvUlyPwBj4Q5VURntV9qa71A==
 
 "statuses@>= 1.4.0 < 2", "statuses@>= 1.5.0 < 2", statuses@~1.5.0:
   version "1.5.0"

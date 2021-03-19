@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ChatWindow from "./Components/ChatWindow";
 import Sidebar from "./Components/Sidebar";
-import peer from "./Backend/peer";
+import { peer } from "./Backend/peer";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "./css/App.css";
 
@@ -13,9 +13,11 @@ function App() {
     const [currRoom, setCurrRoom] = useState();
     const [messages, setMessages] = useState({});
     const [who, setWho] = useState("");
+    const [metamaskStatus, setMetamaskStatus] = useState([0, "Metamask Error"]);
 
     useEffect(() => {
-        const node = async () => await peer(setRooms, setMessages);
+        const node = async () =>
+            await peer(setRooms, setMessages, setMetamaskStatus);
         node().then(async ({ ipfs, orbitdb }) => {
             setIPFS(ipfs);
             setOrbit(orbitdb);
@@ -33,6 +35,7 @@ function App() {
                         ipfs={ipfs}
                         orbit={orbit}
                         rooms={rooms}
+                        metamaskStatus={metamaskStatus}
                         setCurrRoom={setCurrRoom}
                     />
                     <ChatWindow

@@ -1,8 +1,10 @@
+import React from "react";
 import { Avatar, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import React from "react";
+import { connectMetamask } from "../Backend/peer";
+import "status-indicator/styles.css";
 
-function SidebarHeader({ ipfs, orbit }) {
+function SidebarHeader({ ipfs, orbit, metamaskStatus }) {
     const openPrompt = async () => {
         const peerID = prompt("Enter Peer ID");
         if (peerID) {
@@ -17,6 +19,18 @@ function SidebarHeader({ ipfs, orbit }) {
         }
     };
 
+    const StatusColor = () => {
+        console.log(metamaskStatus);
+        const statusCode = metamaskStatus[0];
+        if (statusCode === 2) {
+            return <status-indicator positive pulse />;
+        } else if (statusCode === 1) {
+            return <status-indicator intermediary pulse />;
+        } else {
+            return <status-indicator negative pulse />;
+        }
+    };
+
     return (
         <div
             style={{ height: "10%" }}
@@ -27,6 +41,15 @@ function SidebarHeader({ ipfs, orbit }) {
                     Math.random()
                 )}.svg`}
             />
+            <div
+                className="w-40 mt2 flex pointer"
+                onClick={() => connectMetamask(metamaskStatus[0])}
+            >
+                <div className="w-30 pt2 flex justify-end">
+                    <StatusColor />
+                </div>
+                <p className="w-60 pl2 mt1 white">{metamaskStatus[1]}</p>
+            </div>
             <IconButton onClick={openPrompt}>
                 <AddIcon />
             </IconButton>
