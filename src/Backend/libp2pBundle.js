@@ -7,7 +7,6 @@ import KadDHT from "libp2p-kad-dht";
 import MPLEX from "libp2p-mplex";
 import { NOISE } from "libp2p-noise";
 import PubsubPeerDiscovery from "libp2p-pubsub-peer-discovery";
-import Floodsub from "libp2p-floodsub";
 
 const libp2pBundle = (opts) => {
     const peerId = opts.peerId;
@@ -16,8 +15,7 @@ const libp2pBundle = (opts) => {
         peerId,
         addresses: {
             listen: [
-                "/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/",
-                "/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star/",
+                "/dns4/shrouded-shelf-54137.herokuapp.com/tcp/443/wss/p2p-webrtc-star/",
             ],
         },
         modules: {
@@ -26,7 +24,7 @@ const libp2pBundle = (opts) => {
             connEncryption: [NOISE],
             peerDiscovery: [Bootstrap, PubsubPeerDiscovery],
             dht: KadDHT,
-            pubsub: Floodsub,
+            pubsub: GossipSub,
         },
         config: {
             peerDiscovery: {
