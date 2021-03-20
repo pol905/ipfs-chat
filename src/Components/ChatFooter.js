@@ -15,16 +15,18 @@ function ChatFooter({ currRoom, setMessages, ipfs, currEthAddr }) {
 
     const sendMessage = async (e) => {
         e.preventDefault();
-        const { id } = await db._ipfs.id();
-        const msg = {
-            from: id,
-            message,
-            time: new Date().toLocaleTimeString(),
-            type: 0,
-        };
-        db.add(msg);
-        addNewMessage(p1, setMessages, msg);
-        setMessage("");
+        if (message) {
+            const { id } = await db._ipfs.id();
+            const msg = {
+                from: id,
+                message,
+                time: new Date().toLocaleTimeString(),
+                type: 0,
+            };
+            db.add(msg);
+            addNewMessage(p1, setMessages, msg);
+            setMessage("");
+        }
     };
     return (
         <div className="w-100 h-11 bg-dark-gray gray bl bt flex justify-start">
