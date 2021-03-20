@@ -1,5 +1,9 @@
-.h-10 {
-    height: 10%;
+.h-11 {
+    height: 11%;
+}
+
+.w-85 {
+    width: 85%;
 }
 .input-style {
     border-color: rgb(62, 224, 224);

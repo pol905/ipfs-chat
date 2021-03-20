@@ -8,6 +8,7 @@ import MPLEX from "libp2p-mplex";
 import { NOISE } from "libp2p-noise";
 import PubsubPeerDiscovery from "libp2p-pubsub-peer-discovery";
 
+//Custom LibP2P bundle
 const libp2pBundle = (opts) => {
     const peerId = opts.peerId;
     const bootstrapList = opts.config.Bootstrap;

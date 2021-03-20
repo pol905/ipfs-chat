@@ -2,3 +2,7 @@
     margin-left: 50vw;
     margin-top: 50vh;
 }
+
+.MuiSvgIcon-root {
+    color: silver;
+}
