@@ -1,7 +1,8 @@
 import React from "react";
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { connectMetamask } from "../Backend/peer";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import "status-indicator/styles.css";
 
 function SidebarHeader({ ipfs, orbit, metamaskStatus }) {
@@ -35,11 +36,20 @@ function SidebarHeader({ ipfs, orbit, metamaskStatus }) {
             style={{ height: "10%" }}
             className="w-100 bg-mid-gray pa2 flex justify-between gray bb"
         >
-            <Avatar
-                src={`https://avatars.dicebear.com/api/human/${String(
-                    Math.random()
-                )}.svg`}
-            />
+            <CopyToClipboard text={orbit.id}>
+                <Tooltip
+                    title="Copy nodeID to clipboard"
+                    placement="right"
+                    arrow
+                >
+                    <Avatar
+                        src={`https://avatars.dicebear.com/api/human/${String(
+                            Math.random()
+                        )}.svg`}
+                        className="pointer"
+                    />
+                </Tooltip>
+            </CopyToClipboard>
             <div
                 className="w-40 mt2 flex pointer"
                 onClick={() => connectMetamask(metamaskStatus[0])}

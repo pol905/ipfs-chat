@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from "react";
+
+//Custom hook to keep track of the current account on metamasl=k
 function useStateRef(initialValue) {
     const [metamaskStatus, setMetamaskStatus] = useState(initialValue);
 
