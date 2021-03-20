@@ -1,6 +1,3 @@
-//nodeID, type: 2
-//nodeID, ethWalletAddr, type: 3
-
 const sendTransaction = async (ipfs, p1, db) => {
     const { id } = await db._ipfs.id();
     const req = JSON.stringify({
@@ -9,6 +6,8 @@ const sendTransaction = async (ipfs, p1, db) => {
     });
     ipfs.pubsub.publish(p1 + "_private", req);
 };
+
+//Request amount from other user
 const rcvTransaction = async (ipfs, p1, db, currEthAddr) => {
     const { id } = await db._ipfs.id();
     if (!currEthAddr) {
@@ -26,7 +25,5 @@ const rcvTransaction = async (ipfs, p1, db, currEthAddr) => {
         }
     }
 };
-
-//ethWalletAddr, amount, type=4
 
 export { sendTransaction, rcvTransaction };

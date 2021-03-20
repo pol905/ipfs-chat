@@ -1,3 +1,4 @@
+// Set of all supported chainID's
 const chainID = {
     1: ["Mainnet", "ETH", "https://etherscan.io/tx/"],
     3: ["Ropsten Network", "ETH", "https://ropsten.etherscan.io/tx/"],

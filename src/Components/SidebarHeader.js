@@ -5,7 +5,7 @@ import { connectMetamask } from "../Backend/peer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import "status-indicator/styles.css";
 
-function SidebarHeader({ ipfs, orbit, metamaskStatus }) {
+function SidebarHeader({ ipfs, orbit, metamaskStatus, profile }) {
     const openPrompt = async () => {
         const peerID = prompt("Enter Peer ID");
         if (peerID) {
@@ -43,9 +43,7 @@ function SidebarHeader({ ipfs, orbit, metamaskStatus }) {
                     arrow
                 >
                     <Avatar
-                        src={`https://avatars.dicebear.com/api/human/${String(
-                            Math.random()
-                        )}.svg`}
+                        src={`https://avatars.dicebear.com/api/human/${profile}.svg`}
                         className="pointer"
                     />
                 </Tooltip>

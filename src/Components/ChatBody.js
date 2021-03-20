@@ -5,21 +5,17 @@ import "../css/ChatBody.css";
 import chains from "../Backend/chainID";
 
 function ChatBody({ currRoom, messages, setMessages, who }) {
-    let room;
-    let p1;
-    if (currRoom) {
-        room = Object.keys(currRoom)[0];
-        p1 = room.slice(-6);
-    }
+    const room = Object.keys(currRoom)[0];
+    const p1 = room.slice(-6);
+
     useEffect(() => {
-        if (currRoom) {
-            const msgs = currRoom[room]
-                .iterator({ limit: -1 })
-                .collect()
-                .map((e) => e.payload.value);
-            setMessages((prevState) => ({ ...prevState, [p1]: msgs }));
-        }
+        const msgs = currRoom[room][0]
+            .iterator({ limit: -1 })
+            .collect()
+            .map((e) => e.payload.value);
+        setMessages((prevState) => ({ ...prevState, [p1]: msgs }));
     }, [currRoom]);
+
     return (
         <SimpleBar className="h-79 chat-bg">
             {messages[p1]

@@ -1,5 +1,5 @@
+//Maintains messages in each chat
 const addNewMessage = (p1, setMessages, msg) => {
-    console.log(setMessages);
     setMessages((prevState) => {
         let newState;
         if (!!prevState[p1]) {
@@ -13,7 +13,6 @@ const addNewMessage = (p1, setMessages, msg) => {
                 [p1]: [msg],
             };
         }
-        console.log(newState);
         return newState;
     });
 };

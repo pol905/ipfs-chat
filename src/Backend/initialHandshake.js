@@ -1,6 +1,6 @@
 import { addNewMessage } from "./messageHandler";
+//Creates a new eventlog DB instance
 const createDB = async (p1, p2, orbitdb, data, setMessages) => {
-    console.log(data);
     const { pubKey } = data;
     const options = {
         accessController: {
@@ -14,14 +14,12 @@ const createDB = async (p1, p2, orbitdb, data, setMessages) => {
             .iterator()
             .collect()
             .map((e) => e.payload.value)[0];
-        console.log(message);
         addNewMessage(message.from.slice(-6), setMessages, message);
     });
     return db;
 };
-
+//Opens a eventlog DB from hash
 const openDB = async (orbitdb, data, setMessages) => {
-    console.log(data);
     const { roomID } = data;
     const db = await orbitdb.eventlog(roomID);
     await db.load();
@@ -30,7 +28,6 @@ const openDB = async (orbitdb, data, setMessages) => {
             .iterator()
             .collect()
             .map((e) => e.payload.value)[0];
-        console.log(message);
         addNewMessage(message.from.slice(-6), setMessages, message);
     });
     return db;

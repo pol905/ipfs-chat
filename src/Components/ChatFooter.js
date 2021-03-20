@@ -7,10 +7,10 @@ import RequestTransactionIcon from "@material-ui/icons/CallReceivedRounded";
 import { sendTransaction } from "../Backend/paymentHandlers";
 import { rcvTransaction } from "../Backend/paymentHandlers";
 
-function ChatFooter({ currRoom, setMessages, ipfs, orbit, currEthAddr }) {
+function ChatFooter({ currRoom, setMessages, ipfs, currEthAddr }) {
     const [message, setMessage] = useState("");
     const roomName = Object.keys(currRoom)[0];
-    const db = currRoom[roomName];
+    const db = currRoom[roomName][0];
     const p1 = roomName.slice(-6);
 
     const sendMessage = async (e) => {
@@ -27,12 +27,12 @@ function ChatFooter({ currRoom, setMessages, ipfs, orbit, currEthAddr }) {
         setMessage("");
     };
     return (
-        <div className="w-100 h-11 bg-dark-gray gray bl bt flex justify-between">
-            <form onSubmit={sendMessage} className="w-85 h-25">
+        <div className="w-100 h-11 bg-dark-gray gray bl bt flex justify-start">
+            <form onSubmit={sendMessage} className="ml5 w-75 h-100 center">
                 <input
                     value={message}
                     type="text"
-                    className="mt3 ml4 pa2 br-pill input-style w-100"
+                    className="mt3 pa2 br-pill input-style w-100"
                     placeholder="Enter your message......."
                     onChange={(e) => setMessage(e.target.value)}
                 />
@@ -40,11 +40,13 @@ function ChatFooter({ currRoom, setMessages, ipfs, orbit, currEthAddr }) {
                     Submit
                 </button>
             </form>
-            <div className="mt2 w-15">
+            <div className="mt0 pa2 w-15">
                 <IconButton onClick={() => sendTransaction(ipfs, p1, db)}>
                     <SendTransactionIcon />
                 </IconButton>
-                <IconButton onClick = {()=> rcvTransaction(ipfs,p1,db, currEthAddr)}>
+                <IconButton
+                    onClick={() => rcvTransaction(ipfs, p1, db, currEthAddr)}
+                >
                     <RequestTransactionIcon />
                 </IconButton>
             </div>

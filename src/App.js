@@ -6,8 +6,10 @@ import Sidebar from "./Components/Sidebar";
 import { peer } from "./Backend/peer";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "./css/App.css";
+import EmptyChat from "./images/chat.svg";
 
 function App() {
+    const [profile, setProfile] = useState(String(Math.random()));
     const [ready, setReady] = useState(false);
     const [ipfs, setIPFS] = useState();
     const [orbit, setOrbit] = useState();
@@ -47,6 +49,7 @@ function App() {
                         orbit={orbit}
                         rooms={rooms}
                         metamaskStatus={metamaskStatus}
+                        profile={profile}
                         setCurrRoom={setCurrRoom}
                     />
                     {typeof currRoom !== "undefined" ? (
@@ -59,7 +62,14 @@ function App() {
                             setMessages={setMessages}
                         />
                     ) : (
-                        <p>Hello</p>
+                        <div className="fl w-70 pa6 vh-100 bg-mid-gray">
+                            <img
+                                src={EmptyChat}
+                                alt="Chat"
+                                width="75%"
+                                className="db center"
+                            />
+                        </div>
                     )}
                 </>
             ) : (
