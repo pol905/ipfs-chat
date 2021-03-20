@@ -5,8 +5,9 @@ import { IconButton } from "@material-ui/core";
 import SendTransactionIcon from "@material-ui/icons/CallMadeRounded";
 import RequestTransactionIcon from "@material-ui/icons/CallReceivedRounded";
 import { sendTransaction } from "../Backend/paymentHandlers";
+import { rcvTransaction } from "../Backend/paymentHandlers";
 
-function ChatFooter({ currRoom, setMessages, ipfs, orbit }) {
+function ChatFooter({ currRoom, setMessages, ipfs, orbit, currEthAddr }) {
     const [message, setMessage] = useState("");
     const roomName = Object.keys(currRoom)[0];
     const db = currRoom[roomName];
@@ -43,7 +44,7 @@ function ChatFooter({ currRoom, setMessages, ipfs, orbit }) {
                 <IconButton onClick={() => sendTransaction(ipfs, p1, db)}>
                     <SendTransactionIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick = {()=> rcvTransaction(ipfs,p1,db, currEthAddr)}>
                     <RequestTransactionIcon />
                 </IconButton>
             </div>

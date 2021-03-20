@@ -69,6 +69,23 @@ const messageHandler = async (
             console.log(txHash);
         }
     }
+    else if(type === 4){
+        let {amount} =data;
+        const {rcvAccount} = data;
+        const {chainID} = window.ethereum;
+        amount = "0x" + (Number(amount) * 10 ** 18).toString(16);
+        const txParams = {
+            from: currEthAddr.current,
+            to: rcvAccount,
+            value: amount,
+        };
+        const txHash = await window.ethereum.request({
+            method: "eth_sendTransaction",
+            params: [txParams],
+        });
+        console.log(txHash);
+    }
+
 };
 
 export default messageHandler;
