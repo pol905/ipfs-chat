@@ -1,4 +1,5 @@
 import { createDB, openDB } from "./initialHandshake";
+import { addNewMessage } from "./messageHandler";
 
 const messageHandler = async (
     ipfs,
@@ -6,12 +7,14 @@ const messageHandler = async (
     data,
     rooms,
     currEthAddr,
+    currDB,
     setRooms,
     setMessages
 ) => {
     const { nodeID, type } = data;
     const p1 = orbitdb.id.slice(-6);
     const p2 = nodeID.slice(-6);
+
     if (type === 0) {
         const newRoom = await createDB(p1, p2, orbitdb, data, setMessages);
         const res = JSON.stringify({
@@ -45,47 +48,89 @@ const messageHandler = async (
         ipfs.pubsub.publish(p2 + "_private", res);
     } else if (type === 3) {
         const { ethAddr } = data;
-        const chainID = window.ethereum.chainId;
-        let amount;
-        if (Number(chainID) === 80001) {
-            amount = prompt("Enter the amount of MATIC tokens");
-        } else {
-            amount = prompt("Enter the amount of ETH tokens");
-        }
-        amount = "0x" + (Number(amount) * 10 ** 18).toString(16);
+        const { chainId } = window.ethereum;
+        const amount = prompt("Enter the amount");
+        if (amount) {
+            const txAmount = "0x" + (Number(amount) * 10 ** 18).toString(16);
 
-        if (!ethAddr) {
-            alert("Looks like the receipient hasn't set up payments");
-        } else {
-            const txParams = {
-                from: currEthAddr.current,
-                to: ethAddr,
-                value: amount,
-            };
+            if (!ethAddr) {
+                alert("Looks like the receipient hasn't set up payments");
+            } else {
+                const txParams = {
+                    from: currEthAddr.current,
+                    to: ethAddr,
+                    value: txAmount,
+                };
+                try {
+                    const txHash = await window.ethereum.request({
+                        method: "eth_sendTransaction",
+                        params: [txParams],
+                    });
+                    addTransaction(
+                        p2,
+                        currDB,
+                        orbitdb,
+                        txHash,
+                        setMessages,
+                        Number(chainId),
+                        amount
+                    );
+                } catch (e) {
+                    alert(e.message);
+                }
+            }
+        }
+    } else if (type === 4) {
+        const { amount } = data;
+        const { rcvAccount } = data;
+        const { chainId } = window.ethereum;
+        const txAmount = "0x" + (Number(amount) * 10 ** 18).toString(16);
+        const txParams = {
+            from: currEthAddr.current,
+            to: rcvAccount,
+            value: txAmount,
+        };
+        try {
             const txHash = await window.ethereum.request({
                 method: "eth_sendTransaction",
                 params: [txParams],
             });
-            console.log(txHash);
+            addTransaction(
+                p2,
+                currDB,
+                orbitdb,
+                txHash,
+                setMessages,
+                Number(chainId),
+                amount
+            );
+        } catch (e) {
+            alert(e.message);
         }
     }
-    else if(type === 4){
-        let {amount} =data;
-        const {rcvAccount} = data;
-        const {chainID} = window.ethereum;
-        amount = "0x" + (Number(amount) * 10 ** 18).toString(16);
-        const txParams = {
-            from: currEthAddr.current,
-            to: rcvAccount,
-            value: amount,
-        };
-        const txHash = await window.ethereum.request({
-            method: "eth_sendTransaction",
-            params: [txParams],
-        });
-        console.log(txHash);
-    }
+};
 
+const addTransaction = (
+    p2,
+    currDB,
+    orbitdb,
+    txHash,
+    setMessages,
+    chainID,
+    amount
+) => {
+    const db = Object.values(currDB.current)[0];
+    const msg = {
+        from: orbitdb.id,
+        type: 1,
+        amount,
+        txHash,
+        chainID,
+        time: new Date().toLocaleTimeString(),
+    };
+    console.log(msg);
+    db.add(msg);
+    addNewMessage(p2, setMessages, msg);
 };
 
 export default messageHandler;

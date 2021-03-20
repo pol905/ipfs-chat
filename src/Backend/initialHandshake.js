@@ -30,6 +30,7 @@ const openDB = async (orbitdb, data, setMessages) => {
             .iterator()
             .collect()
             .map((e) => e.payload.value)[0];
+        console.log(message);
         addNewMessage(message.from.slice(-6), setMessages, message);
     });
     return db;

@@ -5,7 +5,13 @@ import libp2pBundle from "./libp2pBundle";
 import { openDB } from "./initialHandshake";
 import detectEthereumProvider from "@metamask/detect-provider";
 
-const peer = async (setRooms, setMessages, setMetamaskStatus, currEthAddr) => {
+const peer = async (
+    setRooms,
+    setMessages,
+    setMetamaskStatus,
+    currEthAddr,
+    currDB
+) => {
     const ipfs = await IPFS.create({ libp2p: libp2pBundle });
     const orbitdb = await OrbitDB.createInstance(ipfs);
     const rooms = await orbitdb.keyvalue("rooms");
@@ -31,6 +37,7 @@ const peer = async (setRooms, setMessages, setMetamaskStatus, currEthAddr) => {
             data,
             rooms,
             currEthAddr,
+            currDB,
             setRooms,
             setMessages
         );

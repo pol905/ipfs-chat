@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useStateRef from "./hooks/useStateRef";
+import useCurrRoomRef from "./hooks/useCurrRoomRef";
 import ChatWindow from "./Components/ChatWindow";
 import Sidebar from "./Components/Sidebar";
 import { peer } from "./Backend/peer";
@@ -11,9 +12,9 @@ function App() {
     const [ipfs, setIPFS] = useState();
     const [orbit, setOrbit] = useState();
     const [rooms, setRooms] = useState({});
-    const [currRoom, setCurrRoom] = useState();
     const [messages, setMessages] = useState({});
     const [who, setWho] = useState("");
+    const [currRoom, setCurrRoom, currDB] = useCurrRoomRef();
     const [metamaskStatus, setMetamaskStatus, currEthAddr] = useStateRef([
         0,
         "Metamask Error",
@@ -21,7 +22,13 @@ function App() {
     ]);
     useEffect(() => {
         const node = async () =>
-            await peer(setRooms, setMessages, setMetamaskStatus, currEthAddr);
+            await peer(
+                setRooms,
+                setMessages,
+                setMetamaskStatus,
+                currEthAddr,
+                currDB
+            );
         node().then(async ({ ipfs, orbitdb }) => {
             setIPFS(ipfs);
             setOrbit(orbitdb);

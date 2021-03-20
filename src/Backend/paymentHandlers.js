@@ -9,22 +9,23 @@ const sendTransaction = async (ipfs, p1, db) => {
     });
     ipfs.pubsub.publish(p1 + "_private", req);
 };
-const rcvTransaction = async(ipfs,p1,db,currEthAddr)=>{
+const rcvTransaction = async (ipfs, p1, db, currEthAddr) => {
     const { id } = await db._ipfs.id();
-    if(!currEthAddr){
+    if (!currEthAddr) {
         alert("Please connect to metamask.");
+    } else {
+        const amount = prompt("Enter the amount requested");
+        if (amount) {
+            const req = JSON.stringify({
+                nodeID: id,
+                rcvAccount: currEthAddr,
+                amount: amount,
+                type: 4,
+            });
+            ipfs.pubsub.publish(p1 + "_private", req);
+        }
     }
-    else{
-    const amount = prompt("Enter the amount requested");
-    const req = JSON.stringify({
-        nodeID:id,
-        type:4,
-        amount:amount,
-        rcvAccount: currEthAddr,
-    });
-    ipfs.pubsub.publish(p1+"_private",req);
-    }
-}
+};
 
 //ethWalletAddr, amount, type=4
 

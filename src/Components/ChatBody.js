@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";
 import "../css/ChatBody.css";
+import chains from "../Backend/chainID";
 
 function ChatBody({ currRoom, messages, setMessages, who }) {
     let room;
@@ -22,8 +23,10 @@ function ChatBody({ currRoom, messages, setMessages, who }) {
     return (
         <SimpleBar className="h-79 chat-bg">
             {messages[p1]
-                ? Object.values(messages[p1]).map(
-                      ({ from, message, time, type }, index) => {
+                ? Object.values(messages[p1]).map((msg, index) => {
+                      const { from, time } = msg;
+                      if (msg.type === 0) {
+                          const { message } = msg;
                           return (
                               <p
                                   key={index}
@@ -38,7 +41,30 @@ function ChatBody({ currRoom, messages, setMessages, who }) {
                               </p>
                           );
                       }
-                  )
+                      const { chainID, amount, txHash } = msg;
+                      return (
+                          <p
+                              key={index}
+                              className={
+                                  from === who
+                                      ? "chat-receiver"
+                                      : "chat-message"
+                              }
+                          >
+                              {from === who ? "Sent: " : "Received: "}
+                              {`${amount} ${chains[chainID][1]} on ${chains[chainID][0]} `}
+                              (
+                              <a
+                                  href={`${chains[chainID][2]}${txHash}`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                              >
+                                  Status
+                              </a>
+                              )<span className="chat-timestamp">{time}</span>
+                          </p>
+                      );
+                  })
                 : undefined}
         </SimpleBar>
     );
