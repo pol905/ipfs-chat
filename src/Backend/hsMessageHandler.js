@@ -1,5 +1,4 @@
 import { createDB, openDB } from "./initialHandshake";
-import BN from "bn.js";
 
 const messageHandler = async (
     ipfs,
