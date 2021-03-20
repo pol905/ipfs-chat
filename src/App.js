@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import useStateRef from "./hooks/useStateRef";
 import ChatWindow from "./Components/ChatWindow";
 import Sidebar from "./Components/Sidebar";
 import { peer } from "./Backend/peer";
@@ -13,11 +14,14 @@ function App() {
     const [currRoom, setCurrRoom] = useState();
     const [messages, setMessages] = useState({});
     const [who, setWho] = useState("");
-    const [metamaskStatus, setMetamaskStatus] = useState([0, "Metamask Error"]);
-
+    const [metamaskStatus, setMetamaskStatus, currEthAddr] = useStateRef([
+        0,
+        "Metamask Error",
+        "",
+    ]);
     useEffect(() => {
         const node = async () =>
-            await peer(setRooms, setMessages, setMetamaskStatus);
+            await peer(setRooms, setMessages, setMetamaskStatus, currEthAddr);
         node().then(async ({ ipfs, orbitdb }) => {
             setIPFS(ipfs);
             setOrbit(orbitdb);
@@ -38,12 +42,18 @@ function App() {
                         metamaskStatus={metamaskStatus}
                         setCurrRoom={setCurrRoom}
                     />
-                    <ChatWindow
-                        who={who}
-                        currRoom={currRoom}
-                        messages={messages}
-                        setMessages={setMessages}
-                    />
+                    {typeof currRoom !== "undefined" ? (
+                        <ChatWindow
+                            who={who}
+                            currRoom={currRoom}
+                            ipfs={ipfs}
+                            messages={messages}
+                            currEthAddr={currEthAddr.current}
+                            setMessages={setMessages}
+                        />
+                    ) : (
+                        <p>Hello</p>
+                    )}
                 </>
             ) : (
                 <CircularProgress className="center" />

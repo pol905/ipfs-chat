@@ -2,36 +2,36 @@ import React, { useState } from "react";
 import "../css/ChatFooter.css";
 import { addNewMessage } from "../Backend/messageHandler";
 import { IconButton } from "@material-ui/core";
-import PaymentIcon from "@material-ui/icons/PaymentRounded";
+import SendTransactionIcon from "@material-ui/icons/CallMadeRounded";
+import RequestTransactionIcon from "@material-ui/icons/CallReceivedRounded";
+import { sendTransaction } from "../Backend/paymentHandlers";
 
-function ChatFooter({ currRoom, setMessages }) {
+function ChatFooter({ currRoom, setMessages, ipfs, orbit }) {
     const [message, setMessage] = useState("");
+    const roomName = Object.keys(currRoom)[0];
+    const db = currRoom[roomName];
+    const p1 = roomName.slice(-6);
+
     const sendMessage = async (e) => {
         e.preventDefault();
-        if (currRoom) {
-            const roomName = Object.keys(currRoom)[0];
-            const db = currRoom[roomName];
-            const { id } = await db._ipfs.id();
-            const msg = {
-                from: id,
-                message,
-                time: new Date().toLocaleTimeString(),
-                type: 0,
-            };
-            db.add(msg);
-            addNewMessage(roomName.slice(-6), setMessages, msg);
-        } else {
-            console.log("Select a Chat First!!!!");
-        }
+        const { id } = await db._ipfs.id();
+        const msg = {
+            from: id,
+            message,
+            time: new Date().toLocaleTimeString(),
+            type: 0,
+        };
+        db.add(msg);
+        addNewMessage(p1, setMessages, msg);
         setMessage("");
     };
     return (
-        <div className="w-100 h-10 bg-dark-gray gray bl bt flex justify-between">
-            <form onSubmit={sendMessage} className="w-90 h-25">
+        <div className="w-100 h-11 bg-dark-gray gray bl bt flex justify-between">
+            <form onSubmit={sendMessage} className="w-85 h-25">
                 <input
                     value={message}
                     type="text"
-                    className="mt3 ml4 br-pill  input-style w-100"
+                    className="mt3 ml4 pa2 br-pill input-style w-100"
                     placeholder="Enter your message......."
                     onChange={(e) => setMessage(e.target.value)}
                 />
@@ -39,9 +39,14 @@ function ChatFooter({ currRoom, setMessages }) {
                     Submit
                 </button>
             </form>
-            <IconButton>
-                <PaymentIcon />
-            </IconButton>
+            <div className="mt2 w-15">
+                <IconButton onClick={() => sendTransaction(ipfs, p1, db)}>
+                    <SendTransactionIcon />
+                </IconButton>
+                <IconButton>
+                    <RequestTransactionIcon />
+                </IconButton>
+            </div>
         </div>
     );
 }

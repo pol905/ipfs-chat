@@ -20,7 +20,6 @@ function SidebarHeader({ ipfs, orbit, metamaskStatus }) {
     };
 
     const StatusColor = () => {
-        console.log(metamaskStatus);
         const statusCode = metamaskStatus[0];
         if (statusCode === 2) {
             return <status-indicator positive pulse />;

@@ -1,10 +1,12 @@
 import { createDB, openDB } from "./initialHandshake";
+import BN from "bn.js";
 
 const messageHandler = async (
     ipfs,
     orbitdb,
     data,
     rooms,
+    currEthAddr,
     setRooms,
     setMessages
 ) => {
@@ -35,6 +37,38 @@ const messageHandler = async (
         });
         setRooms((prevState) => ({ ...prevState, [nodeID]: newRoom }));
         console.log("Node A(step 2):", await rooms.all);
+    } else if (type === 2) {
+        const res = JSON.stringify({
+            nodeID: orbitdb.id,
+            ethAddr: currEthAddr.current,
+            type: 3,
+        });
+        ipfs.pubsub.publish(p2 + "_private", res);
+    } else if (type === 3) {
+        const { ethAddr } = data;
+        const chainID = window.ethereum.chainId;
+        let amount;
+        if (Number(chainID) === 80001) {
+            amount = prompt("Enter the amount of MATIC tokens");
+        } else {
+            amount = prompt("Enter the amount of ETH tokens");
+        }
+        amount = "0x" + (Number(amount) * 10 ** 18).toString(16);
+
+        if (!ethAddr) {
+            alert("Looks like the receipient hasn't set up payments");
+        } else {
+            const txParams = {
+                from: currEthAddr.current,
+                to: ethAddr,
+                value: amount,
+            };
+            const txHash = await window.ethereum.request({
+                method: "eth_sendTransaction",
+                params: [txParams],
+            });
+            console.log(txHash);
+        }
     }
 };
 
