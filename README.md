@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# IPFS CHAT
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Communication being the basic requirement in the present generation along with privacy, it become imperative to have a effecient system which ensures both. Untill now we used to follow a centeralized system architecture which worked well; but technology improved, newer ways to implement this became available. Decenteralized systems ensure we overcome a centeral authority in the whole process. This makes sure all the data isn’t stored in one place
+as well as keep everything secure.
 
-## Available Scripts
+The proposed system provides a platform for users to have the same experience in comminication amongst others
+but on a better and more secure network. Decentralization of the current applications is picking up pace in the world
+as more and more advantages of using this is coming to light. As there is not central authority moderating the data
+on the network there is complete freedom to share anything the user wants. 
 
-In the project directory, you can run:
+Data privacy is a significant issue in today’s centralized architecture. Peer-to-peer networks are one of the solutions to decentralize the Internet, making each connection become autonomous and anonymous. While there are many challenges to this protocol due to the way our Internet is configured, there are also proposed solutions to solve. One of the biggest challenges is NAT, which blocks unwelcoming requests from outside world to our computer. While
+this is beneficial in terms of security, it also blocks Peer-to-peer transmission. The main idea of the proposed system is to not compromise the current user’s experience, but to enhance and migrate them to a decentralized network. 
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## EXISTING SYSTEM
+Existing systems work on the principal of keeping persistent TCP connection between users and server to facilitate communication between end users. Whatsapp recently claimed to have reached a capacity of one million established TCP connection on a single machine. This method is expensive and not feasible as to ensure continued growth, these systems need to be added with extra machines to handle such connections. This will increase in cost and usage of electrcity which isn’t ecofriendly. If we include redundent systems for backup’s the number just increases. Also a big concern in such centralized system architecture is security, as all the data is stored in central servers they are prone to attack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## PROPOSED SYSTEM
 
-### `yarn test`
+Unlike the existing systems, the proposed systems aims to use decentralized networks to overcome these shortcoming that currently present. This approach requires minimal number of servers which are mainly used only for discovery of nodes; not storing or transmitting of data. This ensures security of data as well as provides us with a more feasible working approach. The proposed system is built using the LibP2P network stack, which is a peer to peer
+network. This network provides a “plug and play” option to the users. Users can use any form of transports, multiplexers, security frameworks.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### ADVANTAGES OF PROPOSED SYSTEM
 
-### `yarn build`
+## No censorship:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Making the content distributed between peers, no company, no authority can prevent you from accessing it anymore. Protecting the Data not the wire. In the old HTTP model security is achieved by the means of implementing SSL protocol which leads to HTTPS where the wire (the route) between you and the server is safe, but no one really thought about the data being saved.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Data integrity:
+ 
+IPFS use a cryptographic hash of your content which assure you that the data didn’t change even a bit. 3.2.3 Less bandwidth and less cost:
+In the old HTTP model of moving files imagine we are moving a big file like a video file all over the network. These scenarios had happened like on youtube when we have more than 1billion watched video clip. Can you calculate how much bandwidth is wasted just moving the file across the network all the ways to users? What if someone is watching it for many times? He will endup moving the same file to the same device over and over again. Can you now calculate how much this big wasted bandwidth cost? It can lead to millions wasted for the users all over the world and even for companies when they
+have to strive to maintain big data movement just for a short time period. Having IPFS as protocol to share files in a distributed manner we can have the file downloaded one time for each network and start having peers exchanging the bits of files in that network until they all have it, not wasting bandwidth of global network, and not wasting money on data moving many many times.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## Project Demo: [Click Here](https://still-base-8151.on.fleek.co/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Getting Started/Installing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To set up the project, first pull the project from the git repository using the command below.
+### `git clone https://github.com/pol905/IPFS-CHAT.git" 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+To install all the dependencies run the commands in the project directory.
+### 'yarn install' 
+or
+### 'npm install'
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+After the installation is completed, to start the development environment run the command below:
 
-## Learn More
+### 'yarn start'
+or  
+### 'npm start'
+It will run the start script and start the development server.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To view it on browser open:
+[http://localhost:3000](http://localhost:3000)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Any changes done will recomplie and can be viewed on this link.
 
-### Code Splitting
+### Built with
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* [React] - Used for building the UI framework.
+* [IPFS] - Protocol used for the data transfer in the network.
+* [Lip2p] - Used to create a peer to peer network
+* [OrbitDB] - Serverless, distributed P2P database.
+* [Metamask] - Used for transfer of Ethereum based cryptocurrency.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
